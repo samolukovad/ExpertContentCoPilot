@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_content_idea_tree" model="ir.ui.view">
+        <field name="name">content.idea.tree</field>
+        <field name="model">content.idea</field>
+        <field name="arch" type="xml">
+            <tree string="Content Ideas">
+                <field name="title"/>
+                <field name="status" widget="badge"/>
+                <field name="priority"/>
+                <field name="date"/>
+                <field name="user_id"/>
+                <field name="article_count"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_content_idea_form" model="ir.ui.view">
+        <field name="name">content.idea.form</field>
+        <field name="model">content.idea</field>
+        <field name="arch" type="xml">
+            <form string="Content Idea">
+                <header>
+                    <button name="action_create_article" type="object" string="Create Article" class="btn-primary"/>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="title" placeholder="Idea Title..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="user_id"/>
+                            <field name="priority"/>
+                        </group>
+                        <group>
+                            <field name="tags"/>
+                            <field name="source"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="text" nolabel="1"/>
+                        </page>
+                        <page string="Expected Impact">
+                            <field name="expected_impact"/>
+                        </page>
+                        <page string="Related Articles">
+                            <field name="article_ids">
+                                <tree>
+                                    <field name="title"/>
+                                    <field name="status"/>
+                                    <field name="publish_date"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_content_idea_search" model="ir.ui.view">
+        <field name="name">content.idea.search</field>
+        <field name="model">content.idea</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="title"/>
+                <field name="tags"/>
+                <field name="source"/>
+                <filter name="high_priority" string="High Priority" domain="[('priority','in',['high','urgent'])]"/>
+                <separator/>
+                <filter name="my_ideas" string="My Ideas" domain="[('user_id','=',uid)]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_status" string="Status" context="{'group_by':'status'}"/>
+                    <filter name="group_by_priority" string="Priority" context="{'group_by':'priority'}"/>
+                    <filter name="group_by_user" string="User" context="{'group_by':'user_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_content_idea" model="ir.actions.act_window">
+        <field name="name">Content Ideas</field>
+        <field name="res_model">content.idea</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first content idea!
+            </p>
+            <p>
+                Capture all your content ideas in one place. Turn them into articles later.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_content_root" name="Expert Content" sequence="10"/>
+    <menuitem id="menu_content_ideas" name="Ideas" parent="menu_content_root" action="action_content_idea" sequence="10"/>
+</odoo>
