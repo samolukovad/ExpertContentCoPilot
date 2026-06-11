@@ -1,89 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Tree View -->
-    <record id="view_content_article_tree" model="ir.ui.view">
-        <field name="name">content.article.tree</field>
+    <record id="view_content_article_list" model="ir.ui.view">
+        <field name="name">content.article.list</field>
         <field name="model">content.article</field>
         <field name="arch" type="xml">
-            <tree string="Articles">
+            <list>
                 <field name="title"/>
-                <field name="status" widget="badge"/>
-                <field name="category"/>
+                <field name="status"/>
+                <field name="date"/>
                 <field name="author_id"/>
-                <field name="publish_date"/>
-                <field name="views"/>
-                <field name="likes"/>
-            </tree>
+            </list>
         </field>
     </record>
 
-    <!-- Form View -->
     <record id="view_content_article_form" model="ir.ui.view">
         <field name="name">content.article.form</field>
         <field name="model">content.article</field>
         <field name="arch" type="xml">
-            <form string="Article">
-                <header>
-                    <button name="action_submit_review" type="object" string="Submit Review" states="draft" class="btn-primary"/>
-                    <button name="action_approve" type="object" string="Approve" states="in_review" class="btn-success"/>
-                    <button name="action_publish" type="object" string="Publish" states="scheduled" class="btn-primary"/>
-                    <button name="action_create_new_version" type="object" string="New Version" class="btn-secondary"/>
-                    <field name="status" widget="statusbar" statusbar_visible="draft,in_review,scheduled,published"/>
-                </header>
+            <form>
                 <sheet>
-                    <div class="oe_title">
-                        <h1>
-                            <field name="title" placeholder="Article Title..."/>
-                        </h1>
-                    </div>
                     <group>
-                        <group>
-                            <field name="author_id"/>
-                            <field name="category"/>
-                            <field name="status"/>
-                            <field name="version"/>
-                        </group>
-                        <group>
-                            <field name="publish_date"/>
-                            <field name="scheduled_date"/>
-                            <field name="idea_id"/>
-                            <field name="plan_id"/>
-                        </group>
+                        <field name="title"/>
+                        <field name="status"/>
+                        <field name="date"/>
+                        <field name="author_id"/>
+                        <field name="text"/>
                     </group>
-                    <notebook>
-                        <page string="Content">
-                            <field name="text" nolabel="1"/>
-                        </page>
-                        <page string="SEO &amp; Metadata">
-                            <group>
-                                <field name="tags"/>
-                                <field name="keywords"/>
-                                <field name="word_count"/>
-                                <field name="structure_score"/>
-                            </group>
-                        </page>
-                        <page string="AI Suggestions">
-                            <field name="ai_suggestions" nolabel="1"/>
-                        </page>
-                        <page string="Analytics">
-                            <group>
-                                <field name="views"/>
-                                <field name="likes"/>
-                                <field name="shares"/>
-                                <field name="comments"/>
-                            </group>
-                        </page>
-                        <page string="Version History">
-                            <field name="version_ids">
-                                <tree>
-                                    <field name="title"/>
-                                    <field name="version"/>
-                                    <field name="status"/>
-                                    <field name="publish_date"/>
-                                </tree>
-                            </field>
-                        </page>
-                    </notebook>
                 </sheet>
             </form>
         </field>
@@ -92,7 +34,7 @@
     <record id="action_content_article" model="ir.actions.act_window">
         <field name="name">Articles</field>
         <field name="res_model">content.article</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <menuitem id="menu_content_articles" name="Articles" parent="menu_content_root" action="action_content_article" sequence="20"/>

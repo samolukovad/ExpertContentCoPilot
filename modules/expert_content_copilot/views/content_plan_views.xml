@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_content_plan_tree" model="ir.ui.view">
-        <field name="name">content.plan.tree</field>
+    <record id="view_content_plan_list" model="ir.ui.view">
+        <field name="name">content.plan.list</field>
         <field name="model">content.plan</field>
         <field name="arch" type="xml">
-            <tree string="Content Plans">
+            <list>
                 <field name="name"/>
-                <field name="status" widget="badge"/>
-                <field name="start_date"/>
-                <field name="end_date"/>
-                <field name="article_count"/>
-                <field name="published_count"/>
+                <field name="date"/>
                 <field name="manager_id"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -20,56 +16,14 @@
         <field name="name">content.plan.form</field>
         <field name="model">content.plan</field>
         <field name="arch" type="xml">
-            <form string="Content Plan">
-                <header>
-                    <button name="action_activate" type="object" string="Activate" states="draft" class="btn-primary"/>
-                    <button name="action_complete" type="object" string="Complete" states="active" class="btn-success"/>
-                    <button name="action_generate_report" type="object" string="Generate Report"/>
-                    <field name="status" widget="statusbar" statusbar_visible="draft,active,completed"/>
-                </header>
+            <form>
                 <sheet>
-                    <div class="oe_title">
-                        <h1>
-                            <field name="name" placeholder="Plan Name..."/>
-                        </h1>
-                    </div>
                     <group>
-                        <group>
-                            <field name="start_date"/>
-                            <field name="end_date"/>
-                            <field name="manager_id"/>
-                        </group>
-                        <group>
-                            <field name="target_articles"/>
-                            <field name="target_views"/>
-                        </group>
+                        <field name="name"/>
+                        <field name="date"/>
+                        <field name="manager_id"/>
+                        <field name="description"/>
                     </group>
-                    <notebook>
-                        <page string="Description">
-                            <field name="description"/>
-                            <field name="goal"/>
-                        </page>
-                        <page string="Statistics">
-                            <group string="Progress">
-                                <field name="published_count"/>
-                                <field name="scheduled_count"/>
-                                <field name="draft_count"/>
-                            </group>
-                        </page>
-                        <page string="Articles">
-                            <field name="article_ids">
-                                <tree>
-                                    <field name="title"/>
-                                    <field name="status"/>
-                                    <field name="publish_date"/>
-                                    <field name="author_id"/>
-                                </tree>
-                            </field>
-                        </page>
-                        <page string="Team">
-                            <field name="team_member_ids" widget="many2many_tags"/>
-                        </page>
-                    </notebook>
                 </sheet>
             </form>
         </field>
@@ -78,7 +32,7 @@
     <record id="action_content_plan" model="ir.actions.act_window">
         <field name="name">Content Plans</field>
         <field name="res_model">content.plan</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <menuitem id="menu_content_plans" name="Content Plans" parent="menu_content_root" action="action_content_plan" sequence="30"/>
