@@ -77,7 +77,7 @@ class ContentArticle(models.Model):
     
     @api.constrains('publish_date')
     def _check_publish_date(self):
-        for record in record:
+        for record in self:
             if record.publish_date and record.publish_date < fields.Date.today():
                 raise ValidationError("Publish date cannot be in the past")
     

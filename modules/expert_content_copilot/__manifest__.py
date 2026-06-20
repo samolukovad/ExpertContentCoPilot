@@ -9,7 +9,7 @@
     """,
     'author': 'Samolukovad',
     'website': 'https://github.com/samolukovad/ExpertContentCoPilot',
-    'depends': ['base', 'mail'],
+    'depends': ['base', 'mail', 'calendar'],
     'data': [
         #'security/ir.model.access.csv',
         #'data/sequence_data.xml',

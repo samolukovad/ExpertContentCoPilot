@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <record id="view_content_idea_list" model="ir.ui.view">
         <field name="name">content.idea.list</field>
         <field name="model">content.idea</field>
@@ -7,8 +8,10 @@
             <list>
                 <field name="title"/>
                 <field name="status"/>
+                <field name="priority"/>
                 <field name="date"/>
                 <field name="user_id"/>
+                <field name="article_count"/>
             </list>
         </field>
     </record>
@@ -22,19 +25,87 @@
                     <group>
                         <field name="title"/>
                         <field name="status"/>
+                        <field name="priority"/>
                         <field name="date"/>
                         <field name="user_id"/>
-                        <field name="text"/>
                     </group>
+
+                    <group>
+                        <field name="tags"/>
+                        <field name="source"/>
+                    </group>
+
+                    <group>
+                        <field name="text"/>
+                        <field name="expected_impact"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Articles">
+                            <field name="article_ids"/>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
+        </field>
+    </record>
+
+    <record id="view_content_idea_kanban" model="ir.ui.view">
+        <field name="name">content.idea.kanban</field>
+        <field name="model">content.idea</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="status">
+                <field name="title"/>
+                <field name="status"/>
+                <field name="priority"/>
+                <field name="date"/>
+                <field name="user_id"/>
+                <field name="article_count"/>
+                <templates>
+                    <t t-name="card">
+                        <field class="fw-bold fs-5" name="title"/>
+                        <div>
+                            <span>Status: </span>
+                            <field name="status"/>
+                        </div>
+                        <div>
+                            <span>Priority: </span>
+                            <field name="priority"/>
+                        </div>
+                        <div>
+                            <span>Date: </span>
+                            <field name="date"/>
+                        </div>
+                        <footer>
+                            <span>Responsible: </span>
+                            <field name="user_id"/>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_content_idea_calendar" model="ir.ui.view">
+        <field name="name">content.idea.calendar</field>
+        <field name="model">content.idea</field>
+        <field name="arch" type="xml">
+            <calendar string="Content Ideas"
+                      date_start="date"
+                      color="user_id"
+                      mode="month">
+                <field name="title"/>
+                <field name="status"/>
+                <field name="priority"/>
+                <field name="user_id"/>
+            </calendar>
         </field>
     </record>
 
     <record id="action_content_idea" model="ir.actions.act_window">
         <field name="name">Content Ideas</field>
         <field name="res_model">content.idea</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">kanban,calendar,list,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create your first content idea!
@@ -42,6 +113,14 @@
         </field>
     </record>
 
-    <menuitem id="menu_content_root" name="Expert Content" sequence="10"/>
-    <menuitem id="menu_content_ideas" name="Ideas" parent="menu_content_root" action="action_content_idea" sequence="10"/>
+    <menuitem id="menu_content_root"
+              name="Expert Content"
+              sequence="10"/>
+
+    <menuitem id="menu_content_ideas"
+              name="Ideas"
+              parent="menu_content_root"
+              action="action_content_idea"
+              sequence="10"/>
+
 </odoo>
