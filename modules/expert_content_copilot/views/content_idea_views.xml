@@ -8,10 +8,8 @@
             <list>
                 <field name="title"/>
                 <field name="status"/>
-                <field name="priority"/>
                 <field name="date"/>
                 <field name="user_id"/>
-                <field name="article_count"/>
             </list>
         </field>
     </record>
@@ -25,26 +23,10 @@
                     <group>
                         <field name="title"/>
                         <field name="status"/>
-                        <field name="priority"/>
                         <field name="date"/>
                         <field name="user_id"/>
-                    </group>
-
-                    <group>
-                        <field name="tags"/>
-                        <field name="source"/>
-                    </group>
-
-                    <group>
                         <field name="text"/>
-                        <field name="expected_impact"/>
                     </group>
-
-                    <notebook>
-                        <page string="Articles">
-                            <field name="article_ids"/>
-                        </page>
-                    </notebook>
                 </sheet>
             </form>
         </field>
@@ -57,27 +39,18 @@
             <kanban default_group_by="status">
                 <field name="title"/>
                 <field name="status"/>
-                <field name="priority"/>
                 <field name="date"/>
                 <field name="user_id"/>
-                <field name="article_count"/>
                 <templates>
                     <t t-name="card">
                         <field class="fw-bold fs-5" name="title"/>
                         <div>
-                            <span>Status: </span>
                             <field name="status"/>
                         </div>
                         <div>
-                            <span>Priority: </span>
-                            <field name="priority"/>
-                        </div>
-                        <div>
-                            <span>Date: </span>
                             <field name="date"/>
                         </div>
                         <footer>
-                            <span>Responsible: </span>
                             <field name="user_id"/>
                         </footer>
                     </t>
@@ -96,7 +69,6 @@
                       mode="month">
                 <field name="title"/>
                 <field name="status"/>
-                <field name="priority"/>
                 <field name="user_id"/>
             </calendar>
         </field>
@@ -113,9 +85,7 @@
         </field>
     </record>
 
-    <menuitem id="menu_content_root"
-              name="Expert Content"
-              sequence="10"/>
+    <menuitem id="menu_content_root" name="Expert Content" sequence="10"/>
 
     <menuitem id="menu_content_ideas"
               name="Ideas"

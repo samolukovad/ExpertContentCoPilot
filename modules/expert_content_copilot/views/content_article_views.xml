@@ -8,11 +8,8 @@
             <list>
                 <field name="title"/>
                 <field name="status"/>
-                <field name="category"/>
-                <field name="scheduled_date"/>
-                <field name="publish_date"/>
+                <field name="date"/>
                 <field name="author_id"/>
-                <field name="reviewer_id"/>
             </list>
         </field>
     </record>
@@ -26,42 +23,10 @@
                     <group>
                         <field name="title"/>
                         <field name="status"/>
-                        <field name="category"/>
                         <field name="date"/>
-                    </group>
-
-                    <group>
-                        <field name="scheduled_date"/>
-                        <field name="publish_date"/>
                         <field name="author_id"/>
-                        <field name="reviewer_id"/>
+                        <field name="text"/>
                     </group>
-
-                    <group>
-                        <field name="idea_id"/>
-                        <field name="plan_id"/>
-                        <field name="tags"/>
-                        <field name="keywords"/>
-                    </group>
-
-                    <notebook>
-                        <page string="Content">
-                            <field name="text"/>
-                        </page>
-                        <page string="AI Suggestions">
-                            <field name="ai_suggestions"/>
-                            <field name="structure_score"/>
-                        </page>
-                        <page string="Analytics">
-                            <group>
-                                <field name="views"/>
-                                <field name="likes"/>
-                                <field name="shares"/>
-                                <field name="comments"/>
-                                <field name="word_count" readonly="1"/>
-                            </group>
-                        </page>
-                    </notebook>
                 </sheet>
             </form>
         </field>
@@ -74,30 +39,18 @@
             <kanban default_group_by="status">
                 <field name="title"/>
                 <field name="status"/>
-                <field name="category"/>
-                <field name="scheduled_date"/>
-                <field name="publish_date"/>
+                <field name="date"/>
                 <field name="author_id"/>
                 <templates>
                     <t t-name="card">
                         <field class="fw-bold fs-5" name="title"/>
                         <div>
-                            <field name="category"/>
-                        </div>
-                        <div>
-                            <span>Status: </span>
                             <field name="status"/>
                         </div>
                         <div>
-                            <span>Scheduled: </span>
-                            <field name="scheduled_date"/>
-                        </div>
-                        <div>
-                            <span>Publish: </span>
-                            <field name="publish_date"/>
+                            <field name="date"/>
                         </div>
                         <footer>
-                            <span>Author: </span>
                             <field name="author_id"/>
                         </footer>
                     </t>
@@ -110,15 +63,13 @@
         <field name="name">content.article.calendar</field>
         <field name="model">content.article</field>
         <field name="arch" type="xml">
-            <calendar string="Article Schedule"
-                      date_start="scheduled_date"
+            <calendar string="Articles"
+                      date_start="date"
                       color="author_id"
                       mode="month">
                 <field name="title"/>
                 <field name="status"/>
-                <field name="category"/>
                 <field name="author_id"/>
-                <field name="publish_date"/>
             </calendar>
         </field>
     </record>

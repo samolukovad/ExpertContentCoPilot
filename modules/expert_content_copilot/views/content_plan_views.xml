@@ -11,7 +11,6 @@
                 <field name="start_date"/>
                 <field name="end_date"/>
                 <field name="manager_id"/>
-                <field name="article_count"/>
             </list>
         </field>
     </record>
@@ -28,33 +27,8 @@
                         <field name="start_date"/>
                         <field name="end_date"/>
                         <field name="manager_id"/>
-                    </group>
-
-                    <group>
                         <field name="description"/>
-                        <field name="goal"/>
                     </group>
-
-                    <group string="Targets">
-                        <field name="target_articles"/>
-                        <field name="target_views"/>
-                    </group>
-
-                    <group string="Statistics">
-                        <field name="article_count" readonly="1"/>
-                        <field name="published_count" readonly="1"/>
-                        <field name="scheduled_count" readonly="1"/>
-                        <field name="draft_count" readonly="1"/>
-                    </group>
-
-                    <notebook>
-                        <page string="Team">
-                            <field name="team_member_ids"/>
-                        </page>
-                        <page string="Articles">
-                            <field name="article_ids"/>
-                        </page>
-                    </notebook>
                 </sheet>
             </form>
         </field>
@@ -70,7 +44,6 @@
                 <field name="start_date"/>
                 <field name="end_date"/>
                 <field name="manager_id"/>
-                <field name="article_count"/>
                 <templates>
                     <t t-name="card">
                         <field class="fw-bold fs-5" name="name"/>
@@ -78,20 +51,13 @@
                             <field name="status"/>
                         </div>
                         <div>
-                            <span>Start: </span>
                             <field name="start_date"/>
                         </div>
                         <div>
-                            <span>End: </span>
                             <field name="end_date"/>
                         </div>
-                        <div>
-                            <span>Manager: </span>
-                            <field name="manager_id"/>
-                        </div>
                         <footer>
-                            <span>Articles: </span>
-                            <field name="article_count"/>
+                            <field name="manager_id"/>
                         </footer>
                     </t>
                 </templates>
