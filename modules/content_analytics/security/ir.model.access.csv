@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_content_publication_stat,content.publication.stat,model_content_publication_stat,base.group_user,1,1,1,1
