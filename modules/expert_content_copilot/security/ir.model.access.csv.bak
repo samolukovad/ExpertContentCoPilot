@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_content_idea_user,content.idea.user,model_content_idea,base.group_user,1,1,1,1
-access_content_article_user,content.article.user,model_content_article,base.group_user,1,1,1,1
-access_content_plan_user,content.plan.user,model_content_plan,base.group_user,1,1,1,1
